@@ -46,6 +46,22 @@ resource "aws_ecs_task_definition" "main" {
         {
           name  = "COGNITO_USER_POOL_ID"
           value = aws_ssm_parameter.cognito_pool_id.value
+        },
+        {
+          name  = "PAYFAST_MERCHANT_ID"
+          value = aws_ssm_parameter.payfast-id.value
+        },
+        {
+          name  = "PAYFAST_MERCHANT_KEY"
+          value = aws_ssm_parameter.payfast-key.value
+        },
+        {
+          name  = "PAYFAST_PASSPHRASE"
+          value = aws_ssm_parameter.payfast-passphrase.value
+        },
+        {
+          name  = "PAYFAST_SANDBOX"
+          value = aws_ssm_parameter.payfast-sandbox.value
         }
       ]
       secrets = [
@@ -64,23 +80,6 @@ resource "aws_ecs_task_definition" "main" {
         {
           name      = "COGNITO_CLIENT_ID"
           valueFrom = aws_ssm_parameter.cognito_client_id.arn
-        },
-
-        {
-          name  = "PAYFAST_MERCHANT_ID"
-          valueFrom = aws_ssm_parameter.payfast-id.value
-        },
-        {
-          name  = "PAYFAST_MERCHANT_KEY"
-          valueFrom = aws_ssm_parameter.payfast-key.value
-        },
-        {
-          name  = "PAYFAST_PASSPHRASE"
-          valueFrom = aws_ssm_parameter.payfast-passphrase.value
-        },
-        {
-          name  = "PAYFAST_SANDBOX"
-          valueFrom = aws_ssm_parameter.payfast-sandbox.value
         }
 
       ]
