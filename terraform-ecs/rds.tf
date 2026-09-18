@@ -13,9 +13,9 @@ resource "aws_db_instance" "postgres" {
   storage_type          = "gp3"
   storage_encrypted     = true
 
-  db_name = data.aws_ssm_parameter.db_name.value
-  username = data.aws_ssm_parameter.db_user.value
-  password = data.aws_ssm_parameter.db_password.value
+  db_name = aws_ssm_parameter.db_name.value
+  username = aws_ssm_parameter.db_user.value
+  password = aws_ssm_parameter.db_password.value
 
   port = 5432
 
