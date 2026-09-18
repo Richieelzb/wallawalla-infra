@@ -24,3 +24,16 @@ data "aws_ami" "my-data-ami" {
     values = ["hvm"]
   }
 }
+
+data "aws_ssm_parameter" "db_name" {
+  name = "/wallawalla/prod/db-name"
+}
+
+data "aws_ssm_parameter" "db_user" {
+  name = "/wallawalla/prod/db-user"
+}
+
+data "aws_ssm_parameter" "db_password" {
+  name            = "/wallawalla/prod/db-password"
+  with_decryption = true
+}
