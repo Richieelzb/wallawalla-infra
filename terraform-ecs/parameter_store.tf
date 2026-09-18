@@ -1,7 +1,7 @@
 resource "aws_ssm_parameter" "db_host" {
   name  = "/wallawalla/prod/db-host"
   type  = "String"
-  value = "wallawalla-postgres.cng64mu8ka2f.eu-west-1.rds.amazonaws.com:5432"
+  value = "wallawalla-postgres.cng64mu8ka2f.eu-west-1.rds.amazonaws.com"
 }
 
 resource "aws_ssm_parameter" "db_password" {
