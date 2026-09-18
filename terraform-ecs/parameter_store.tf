@@ -1,7 +1,7 @@
 resource "aws_ssm_parameter" "db_host" {
   name  = "/wallawalla/prod/db-host"
   type  = "String"
-  value = "wallawalla-postgres.cr8k06miktmp.eu-west-1.rds.amazonaws.com"
+  value = "wallawalla-postgres.cng64mu8ka2f.eu-west-1.rds.amazonaws.com:5432"
 }
 
 resource "aws_ssm_parameter" "db_password" {
@@ -49,13 +49,13 @@ resource "aws_ssm_parameter" "s3_bucket_name" {
 resource "aws_ssm_parameter" "cognito_pool_id" {
   name  = "/wallawalla/prod/cognito-user-pool-id"
   type  = "String"
-  value = "eu-west-1_DaUWwIOiE"
+  value = "eu-west-1_j3pCX6WNm"
 }
 
 resource "aws_ssm_parameter" "cognito_client_id" {
   name  = "/wallawalla/prod/cognito-client-id"
   type  = "SecureString"
-  value = "7c8hqr3movs90ctqk1ar8afiem"
+  value = "1fd7kcs92j342mjas42e3hmbvt"
 }
 
 resource "aws_ssm_parameter" "ses_region" {
