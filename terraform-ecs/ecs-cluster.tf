@@ -68,19 +68,19 @@ resource "aws_ecs_task_definition" "main" {
 
         {
           name  = "PAYFAST_MERCHANT_ID"
-          value = aws_ssm_parameter.payfast-id.value
+          valueFrom = aws_ssm_parameter.payfast-id.value
         },
         {
           name  = "PAYFAST_MERCHANT_KEY"
-          value = aws_ssm_parameter.payfast-key.value
+          valueFrom = aws_ssm_parameter.payfast-key.value
         },
         {
           name  = "PAYFAST_PASSPHRASE"
-          value = aws_ssm_parameter.payfast-passphrase.value
+          valueFrom = aws_ssm_parameter.payfast-passphrase.value
         },
         {
           name  = "PAYFAST_SANDBOX"
-          value = aws_ssm_parameter.payfast-sandbox.value
+          valueFrom = aws_ssm_parameter.payfast-sandbox.value
         }
 
       ]
