@@ -93,7 +93,7 @@ resource "aws_lb_listener_rule" "owners" {
 }
 
 
-#---------------------------------wallaproperty--------------------------------------
+#---------------------------------wallaproperty-------------------------------------------
 resource "aws_lb_target_group" "property-tg" {
   name                 = "property-alb-targets"
   port                 = 5000
