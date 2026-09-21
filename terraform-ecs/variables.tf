@@ -95,5 +95,5 @@ variable "db_identifier" {
 }
 
 variable "instance_class" {
-  type    = string
+  type = string
 }
