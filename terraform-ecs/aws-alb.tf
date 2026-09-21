@@ -6,8 +6,6 @@ resource "aws_lb" "main-alb" {
   subnets            = module.vpc.public_subnets[*]
 }
 
-
-
 resource "aws_lb_target_group" "main-tg" {
   name        = "main-alb-targets"
   port        = 5000
@@ -21,16 +19,6 @@ resource "aws_lb_target_group" "main-tg" {
     healthy_threshold   = 2
     unhealthy_threshold = 2
   }
-}
-
-
-resource "aws_lb_target_group" "owner-tg" {
-  name                 = "owner-alb-targets"
-  port                 = 5000
-  protocol             = "HTTP"
-  target_type          = "ip"
-  deregistration_delay = "30"
-  vpc_id               = module.vpc.vpc_id
 }
 
 resource "aws_lb_listener" "main-listener" {
@@ -47,7 +35,17 @@ resource "aws_lb_listener" "main-listener" {
   }
 }
 
-resource "aws_lb_listener_rule" "owner" {
+#---------------------------------wallasearch--------------------------------------
+resource "aws_lb_target_group" "search-tg" {
+  name                 = "search-alb-targets"
+  port                 = 5000
+  protocol             = "HTTP"
+  target_type          = "ip"
+  deregistration_delay = "30"
+  vpc_id               = module.vpc.vpc_id
+}
+
+resource "aws_lb_listener_rule" "search" {
 
   listener_arn = aws_lb_listener.main-listener.arn
 
@@ -55,17 +53,104 @@ resource "aws_lb_listener_rule" "owner" {
 
   action {
     type             = "forward"
-    target_group_arn = aws_lb_target_group.owner-tg.arn
+    target_group_arn = aws_lb_target_group.search-tg.arn
   }
 
   condition {
     host_header {
-      values = ["owner.wallawalla.co.za"]
+      values = ["search.wallawalla.co.za"]
+    }
+  }
+}
+
+#---------------------------------wallasearch register--------------------------------------
+
+resource "aws_lb_target_group" "owners-tg" {
+  name                 = "search-owner-alb-targets"
+  port                 = 5000
+  protocol             = "HTTP"
+  target_type          = "ip"
+  deregistration_delay = "30"
+  vpc_id               = module.vpc.vpc_id
+}
+
+resource "aws_lb_listener_rule" "owners" {
+
+  listener_arn = aws_lb_listener.main-listener.arn
+
+  priority = 30
+
+  action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.owners-tg.arn
+  }
+
+  condition {
+    host_header {
+      values = ["owners.wallawalla.co.za"]
     }
   }
 }
 
 
+#---------------------------------wallaproperty--------------------------------------
+resource "aws_lb_target_group" "property-tg" {
+  name                 = "property-alb-targets"
+  port                 = 5000
+  protocol             = "HTTP"
+  target_type          = "ip"
+  deregistration_delay = "30"
+  vpc_id               = module.vpc.vpc_id
+}
+
+resource "aws_lb_listener_rule" "property" {
+
+  listener_arn = aws_lb_listener.main-listener.arn
+
+  priority = 30
+
+  action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.property-tg.arn
+  }
+
+  condition {
+    host_header {
+      values = ["property.wallawalla.co.za"]
+    }
+  }
+}
+
+
+#---------------------------------wallaproperty register--------------------------------------
+resource "aws_lb_target_group" "ownerp-tg" {
+  name                 = "ownerp-alb-targets"
+  port                 = 5000
+  protocol             = "HTTP"
+  target_type          = "ip"
+  deregistration_delay = "30"
+  vpc_id               = module.vpc.vpc_id
+}
+
+resource "aws_lb_listener_rule" "ownerp" {
+
+  listener_arn = aws_lb_listener.main-listener.arn
+
+  priority = 30
+
+  action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.ownerp-tg.arn
+  }
+
+  condition {
+    host_header {
+      values = ["ownerp.wallawalla.co.za"]
+    }
+  }
+}
+
+#-----------------------------------------------------------------------------------------
 resource "aws_lb_listener" "http-redirect-main" {
   load_balancer_arn = aws_lb.main-alb.arn
   port              = 80

@@ -23,9 +23,45 @@ resource "aws_route53_record" "homepage-www" {
 }
 
 
-resource "aws_route53_record" "epl" {
+resource "aws_route53_record" "search" {
   zone_id = var.zone_id
-  name    = "owner.wallawalla.co.za"
+  name    = "search.wallawalla.co.za"
+  type    = "A"
+
+  alias {
+    name                   = aws_lb.main-alb.dns_name
+    zone_id                = aws_lb.main-alb.zone_id
+    evaluate_target_health = true
+  }
+}
+
+resource "aws_route53_record" "owners" {
+  zone_id = var.zone_id
+  name    = "owners.wallawalla.co.za"
+  type    = "A"
+
+  alias {
+    name                   = aws_lb.main-alb.dns_name
+    zone_id                = aws_lb.main-alb.zone_id
+    evaluate_target_health = true
+  }
+}
+
+resource "aws_route53_record" "property" {
+  zone_id = var.zone_id
+  name    = "property.wallawalla.co.za"
+  type    = "A"
+
+  alias {
+    name                   = aws_lb.main-alb.dns_name
+    zone_id                = aws_lb.main-alb.zone_id
+    evaluate_target_health = true
+  }
+}
+
+resource "aws_route53_record" "ownerp" {
+  zone_id = var.zone_id
+  name    = "ownerp.wallawalla.co.za"
   type    = "A"
 
   alias {
