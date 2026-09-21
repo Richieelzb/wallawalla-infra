@@ -49,7 +49,7 @@ resource "aws_lb_listener_rule" "search" {
 
   listener_arn = aws_lb_listener.main-listener.arn
 
-  priority = 10
+  priority = 100
 
   action {
     type             = "forward"
@@ -78,7 +78,7 @@ resource "aws_lb_listener_rule" "owners" {
 
   listener_arn = aws_lb_listener.main-listener.arn
 
-  priority = 20
+  priority = 200
 
   action {
     type             = "forward"
@@ -107,7 +107,7 @@ resource "aws_lb_listener_rule" "property" {
 
   listener_arn = aws_lb_listener.main-listener.arn
 
-  priority = 30
+  priority = 300
 
   action {
     type             = "forward"
@@ -136,7 +136,7 @@ resource "aws_lb_listener_rule" "ownerp" {
 
   listener_arn = aws_lb_listener.main-listener.arn
 
-  priority = 40
+  priority = 400
 
   action {
     type             = "forward"
