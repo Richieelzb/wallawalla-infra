@@ -18,6 +18,13 @@ resource "aws_ecs_task_definition" "main" {
       name  = "main-site"
       image = "${aws_ecr_repository.main.repository_url}:latest"
 
+      secrets = [
+        {
+          name      = "GOOGLE_MAPS_API_KEY"
+          valueFrom = aws_ssm_parameter.google_maps_key.arn
+        }
+      ]
+
       essential = true
 
       portMappings = [
