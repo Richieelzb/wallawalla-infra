@@ -49,13 +49,13 @@ resource "aws_ssm_parameter" "s3_bucket_name" {
 resource "aws_ssm_parameter" "cognito_pool_id" {
   name  = "/wallawalla/prod/cognito-user-pool-id"
   type  = "String"
-  value = "eu-west-1_j3pCX6WNm"
+  value = "eu-west-1_jIAv2qmQN"
 }
 
 resource "aws_ssm_parameter" "cognito_client_id" {
   name  = "/wallawalla/prod/cognito-client-id"
   type  = "SecureString"
-  value = "1fd7kcs92j342mjas42e3hmbvt"
+  value = "73pkqs1h0dqlekuum4gcu8q7kk"
 }
 
 resource "aws_ssm_parameter" "ses_region" {
