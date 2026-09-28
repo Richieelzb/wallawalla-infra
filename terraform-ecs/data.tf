@@ -24,3 +24,8 @@ data "aws_ami" "my-data-ami" {
     values = ["hvm"]
   }
 }
+
+
+data "aws_ssm_parameter" "ecs_ami" {
+  name = "/aws/service/ecs/optimized-ami/amazon-linux-2/recommended/image_id"
+}

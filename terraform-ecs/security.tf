@@ -113,3 +113,12 @@ resource "aws_security_group" "postgres_client" {
 #   security_group_id        = var.rds_security_group_id
 #   source_security_group_id = aws_security_group.postgres_client.id
 # }
+
+resource "aws_security_group_rule" "ecs_to_rds" {
+  type                     = "ingress"
+  from_port                = 5432
+  to_port                  = 5432
+  protocol                 = "tcp"
+  security_group_id        = aws_security_group.postgres_rds_sg.id
+  source_security_group_id = aws_security_group.ecs-sg.id
+}
