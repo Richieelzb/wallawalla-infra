@@ -1,7 +1,7 @@
 resource "aws_launch_template" "ecs" {
   name_prefix   = "wallawalla-ecs-"
   image_id      = data.aws_ssm_parameter.ecs_ami.value
-  instance_type = "t3.large"
+  instance_type = "t3.xlarge"
 
   iam_instance_profile {
     name = aws_iam_instance_profile.ecs.name
