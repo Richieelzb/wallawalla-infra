@@ -474,6 +474,7 @@ resource "aws_ecs_service" "lzb-project-main" {
   network_configuration {
     subnets          = module.vpc.public_subnets[*]
     security_groups  = [aws_security_group.ecs-sg.id]
+    assign_public_ip = true
   }
 
   load_balancer {
@@ -501,6 +502,7 @@ resource "aws_ecs_service" "lzb-project-search" {
   network_configuration {
     subnets          = module.vpc.public_subnets[*]
     security_groups  = [aws_security_group.ecs-sg.id]
+    assign_public_ip = true
   }
 
   load_balancer {
@@ -528,6 +530,7 @@ resource "aws_ecs_service" "lzb-project-owners" {
   network_configuration {
     subnets          = module.vpc.public_subnets[*]
     security_groups  = [aws_security_group.ecs-sg.id]
+    assign_public_ip = true
   }
 
   load_balancer {
@@ -555,6 +558,7 @@ resource "aws_ecs_service" "lzb-project-property" {
   network_configuration {
     subnets          = module.vpc.public_subnets[*]
     security_groups  = [aws_security_group.ecs-sg.id]
+    assign_public_ip = true
   }
 
   load_balancer {
@@ -581,6 +585,7 @@ resource "aws_ecs_service" "lzb-project-ownerp" {
   network_configuration {
     subnets          = module.vpc.public_subnets[*]
     security_groups  = [aws_security_group.ecs-sg.id]
+    assign_public_ip = true
   }
 
   load_balancer {
