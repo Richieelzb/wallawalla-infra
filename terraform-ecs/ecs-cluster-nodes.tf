@@ -4,7 +4,7 @@ resource "aws_ecs_cluster" "lzb-project-main" {
 
 resource "aws_ecs_task_definition" "main" {
   family                   = "main-site"
-  network_mode             = "bridge"
+  network_mode             = "awsvpc"
   requires_compatibilities = ["EC2"]
 
   execution_role_arn = aws_iam_role.ecs_task_execution_role.arn
@@ -471,10 +471,10 @@ resource "aws_ecs_service" "lzb-project-main" {
 
   desired_count = 1
 
-  # network_configuration {
-  #   subnets          = module.vpc.public_subnets[*]
-  #   security_groups  = [aws_security_group.ecs-sg.id]
-  # }
+  network_configuration {
+    subnets          = module.vpc.public_subnets[*]
+    security_groups  = [aws_security_group.ecs-sg.id]
+  }
 
   load_balancer {
     target_group_arn = aws_lb_target_group.main-tg.arn
