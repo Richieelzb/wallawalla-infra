@@ -8,9 +8,9 @@ resource "aws_launch_template" "ecs" {
   }
 
   user_data = base64encode(<<EOF
-#!/bin/bash
-echo ECS_CLUSTER=wallawalla-cluster >> /etc/ecs/ecs.config
-EOF
+    #!/bin/bash
+    echo ECS_CLUSTER=wallawalla-cluster >> /etc/ecs/ecs.config
+    EOF
   )
 
   network_interfaces {
