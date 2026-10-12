@@ -18,10 +18,69 @@ resource "aws_ecs_task_definition" "main" {
       name  = "main-site"
       image = "${aws_ecr_repository.main.repository_url}:latest"
 
+      environment = [
+        {
+          name  = "DB_HOST"
+          value = aws_ssm_parameter.db_host.value
+        },
+        {
+          name  = "DB_PORT"
+          value = aws_ssm_parameter.db_port.value
+        },
+        {
+          name  = "DB_NAME"
+          value = aws_ssm_parameter.db_name.value
+        },
+        {
+          name  = "DB_USER"
+          value = aws_ssm_parameter.db_user.value
+        },
+        {
+          name  = "S3_BUCKET_NAME"
+          value = aws_ssm_parameter.s3_bucket_name.value
+        },
+        {
+          name  = "SES_REGION"
+          value = aws_ssm_parameter.ses_region.value
+        },
+        {
+          name  = "COGNITO_USER_POOL_ID"
+          value = aws_ssm_parameter.cognito_pool_id.value
+        },
+
+        {
+          name  = "PAYFAST_MERCHANT_ID"
+          value = aws_ssm_parameter.payfast-id.value
+        },
+        {
+          name  = "PAYFAST_MERCHANT_KEY"
+          value = aws_ssm_parameter.payfast-key.value
+        },
+        {
+          name  = "PAYFAST_PASSPHRASE"
+          value = aws_ssm_parameter.payfast-passphrase.value
+        },
+        {
+          name  = "PAYFAST_SANDBOX"
+          value = aws_ssm_parameter.payfast-sandbox.value
+        }
+      ]
       secrets = [
+        {
+          name      = "DB_PASSWORD"
+          valueFrom = aws_ssm_parameter.db_password.arn
+        },
+        {
+          name      = "SECRET_KEY"
+          valueFrom = aws_ssm_parameter.flask_secret.arn
+        },
         {
           name      = "GOOGLE_MAPS_API_KEY"
           valueFrom = aws_ssm_parameter.google_maps_key.arn
+        },
+        {
+          name      = "COGNITO_CLIENT_ID"
+          valueFrom = aws_ssm_parameter.cognito_client_id.arn
         }
       ]
 
